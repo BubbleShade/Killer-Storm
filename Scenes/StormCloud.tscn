@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://tmhgfvxtv5kw"]
+
+[ext_resource type="Texture2D" uid="uid://cyx6w2ohep813" path="res://Assets/Storm_Cloud.png" id="1_idq82"]
+[ext_resource type="Texture2D" uid="uid://baj4wfkr0650k" path="res://Assets/Circle.png" id="2_cm0nc"]
+[ext_resource type="Script" path="res://Script/Cloud.gd" id="2_uisnr"]
+
+[node name="StormCloud" type="Sprite2D"]
+z_index = 2
+texture = ExtResource("1_idq82")
+offset = Vector2(0, -10)
+script = ExtResource("2_uisnr")
+
+[node name="Zone" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 0.12549)
+show_behind_parent = true
+z_index = 1
+scale = Vector2(0.12, 0.1)
+texture = ExtResource("2_cm0nc")
+
+[node name="Button" type="Button" parent="."]
+offset_left = -15.0
+offset_top = -9.0
+offset_right = 14.0

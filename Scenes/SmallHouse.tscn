@@ -1,7 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://djgpamym62unm"]
+[gd_scene load_steps=3 format=3 uid="uid://djgpamym62unm"]
 
 [ext_resource type="Texture2D" uid="uid://bfqfe3jr8gsm8" path="res://Assets/SmallHouse.png" id="1_8gtid"]
+[ext_resource type="Script" path="res://Script/small_house.gd" id="2_n5mv3"]
 
 [node name="SmallHouse" type="Sprite2D"]
-scale = Vector2(4, 4)
 texture = ExtResource("1_8gtid")
+script = ExtResource("2_n5mv3")
