@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://c4i4dwrs5rawn"]
+
+[ext_resource type="Texture2D" uid="uid://8x6t2d6eosvt" path="res://Assets/Lightning.png" id="1_s05dk"]
+[ext_resource type="Script" path="res://Script/lightning.gd" id="2_37kyp"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_i730i"]
+radius = 4.0
+
+[node name="Lightning" type="Sprite2D"]
+texture = ExtResource("1_s05dk")
+offset = Vector2(0, -8)
+script = ExtResource("2_37kyp")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_i730i")

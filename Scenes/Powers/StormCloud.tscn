@@ -17,7 +17,13 @@ z_index = 1
 scale = Vector2(0.12, 0.1)
 texture = ExtResource("2_cm0nc")
 
-[node name="Button" type="Button" parent="."]
+[node name="Drag" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(1, 1, 1, 0)
 offset_left = -15.0
 offset_top = -9.0
 offset_right = 14.0
+theme_override_constants/outline_size = 0
+theme_override_constants/h_separation = 0
+theme_override_constants/icon_max_width = 0
+theme_override_constants/align_to_largest_stylebox = 0

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://hpofus7s3mks"]
 
-[ext_resource type="Script" path="res://Script/kerpow.gd" id="1_xbgof"]
+[ext_resource type="Script" path="res://Script/Level/kerpow.gd" id="1_xbgof"]
 
 [node name="Kerpow" type="Node2D"]
 script = ExtResource("1_xbgof")

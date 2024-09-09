@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @export var speed = 10
+@export var runSpeed = 30
 @export var target_object : Node2D
 
 @onready var nav_agent : NavigationAgent2D = $NavigationAgent2D 
@@ -15,6 +16,7 @@ func _ready() -> void:
 	nav_agent.target_reached.connect(on_reach)
 
 func _physics_process(_delta:float):
+	if(LevelInfo.started): speed = runSpeed
 	_follow_path(_delta)
 	
 func _follow_path(_delta:float):
@@ -25,3 +27,5 @@ func _follow_path(_delta:float):
 func make_path():
 	print(target_object)
 	nav_agent.target_position = target_object.position
+func damage(power):
+	queue_free()
