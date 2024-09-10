@@ -3,6 +3,7 @@ extends CharacterBody2D
 @export var speed = 10
 @export var runSpeed = 30
 @export var target_object : Node2D
+@export var loitering  = 0.5
 
 @onready var nav_agent : NavigationAgent2D = $NavigationAgent2D 
 var invulnerability = 0.1
@@ -10,15 +11,13 @@ var pathing = false
 var randDirection
 func AI_game_started():
 	var levelHandler : LevelHandler = LevelInfo.get_level_handler()
-	var house
 	var choseHouse
 	var closest = 100
-	for i in levelHandler.houses:
-		house = levelHandler.houses.pick_random()
+	for house in levelHandler.houses:
 		var dist = position.distance_to(house.position) / (1 + (house.hp/10))
 		if(dist < closest): choseHouse = house
-	if house:
-		target_object = house
+	if choseHouse:
+		target_object = choseHouse
 		make_path()
 		return
 	else:
@@ -35,13 +34,16 @@ func AI_before_game_start():
 	print(house)
 	target_object = house
 	make_path()
-func run_AI():
+func run_AI(delta):
 	if(pathing):
 		if(target_object and target_object.destroyed):
 			target_object = null
 		else: return
 	if(LevelInfo.started):
 		AI_game_started()
+		return
+	if(loitering > 0):
+		loitering -= delta
 		return
 	AI_before_game_start()
 func enterHouse(house):
@@ -60,12 +62,13 @@ func on_reach():
 		if(randf_range(0,3) <= 2):
 			enterHouse(target_object)
 			return
+	loitering = randf_range(3,5)
 	target_object = null
 	#get_tree().create_timer(randf_range(1,3)).timeout.connect(run_AI)
 	
 func on_start():
 	nav_agent.set_navigation_layer_value(2, true)
-	speed = runSpeed
+	speed = runSpeed + randi_range(-10,10)
 	pathing = false
 func _ready() -> void:
 	if(LevelInfo.started): 
@@ -76,7 +79,7 @@ func _ready() -> void:
 	nav_agent.target_reached.connect(on_reach)
 
 func _physics_process(_delta:float):
-	run_AI()
+	run_AI(_delta)
 	_follow_path(_delta)
 var time_since_repath = 0.1
 func _process(delta: float) -> void:

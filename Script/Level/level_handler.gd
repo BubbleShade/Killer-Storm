@@ -3,6 +3,7 @@ class_name LevelHandler
 
 var person_scene = load("res://Scenes/Person.tscn")
 var houses = []
+var hazards = []
 
 func spawnGuy():
 	var startHouse = houses.pick_random()

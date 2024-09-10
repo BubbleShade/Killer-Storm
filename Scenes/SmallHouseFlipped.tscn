@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://c6alqr12uqth3"]
+
+[ext_resource type="Texture2D" uid="uid://bfqfe3jr8gsm8" path="res://Assets/SmallHouse.png" id="1_37iw3"]
+[ext_resource type="Script" path="res://Script/small_house.gd" id="2_kffmv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gi7rh"]
+size = Vector2(8.5, 5.5)
+
+[node name="SmallHouse" type="Sprite2D"]
+texture = ExtResource("1_37iw3")
+offset = Vector2(1.5, -4)
+flip_h = true
+script = ExtResource("2_kffmv")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(1.75, -3)
+shape = SubResource("RectangleShape2D_gi7rh")

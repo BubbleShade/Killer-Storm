@@ -1,16 +1,59 @@
-[gd_scene load_steps=3 format=3 uid="uid://cp2fwv8hxhnys"]
+[gd_scene load_steps=6 format=3 uid="uid://cp2fwv8hxhnys"]
 
 [ext_resource type="Script" path="res://Script/Level/level_ui.gd" id="1_h7ist"]
 [ext_resource type="Texture2D" uid="uid://cqf10l2aopykw" path="res://Assets/Start.png" id="2_0f567"]
+[ext_resource type="Theme" uid="uid://cpm0uo3c8msol" path="res://Scenes/Level/LevelUI.tres" id="2_821gn"]
+[ext_resource type="Texture2D" uid="uid://cyx6w2ohep813" path="res://Assets/Storm_Cloud.png" id="3_ixcrv"]
+[ext_resource type="Texture2D" uid="uid://8x6t2d6eosvt" path="res://Assets/Lightning.png" id="4_ro6mu"]
 
 [node name="LevelUI" type="CanvasLayer"]
 script = ExtResource("1_h7ist")
+storm = true
 
 [node name="Panel" type="Panel" parent="."]
 offset_left = 2.0
 offset_top = 544.0
 offset_right = 1147.0
 offset_bottom = 647.0
+theme = ExtResource("2_821gn")
+
+[node name="MenuBar" type="MenuBar" parent="Panel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
+layout_mode = 0
+offset_left = 4.0
+offset_right = 1073.0
+offset_bottom = 100.0
+
+[node name="Storm" type="Button" parent="Panel/HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+toggle_mode = true
+icon = ExtResource("3_ixcrv")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Lightning" type="Button" parent="Panel/HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+toggle_mode = true
+icon = ExtResource("4_ro6mu")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Button3" type="Button" parent="Panel/HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+toggle_mode = true
+icon = ExtResource("3_ixcrv")
+icon_alignment = 1
+expand_icon = true
 
 [node name="StartButton" type="TextureButton" parent="."]
 offset_left = 1061.0

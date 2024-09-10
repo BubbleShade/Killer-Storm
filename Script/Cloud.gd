@@ -1,9 +1,9 @@
 extends Interactable
-@export var tileMap : TileMapLayer
+class_name Cloud
+
+@export var tileMapName : String
 @export var RadiusX : float
 @export var RadiusY : float
-
-
 
 # https://www.redblobgames.com/grids/circle-drawing/
 func inside_circle(center : Vector2, tile : Vector2, radiusX : float, radiusY : float) -> bool:
@@ -21,14 +21,18 @@ func getCircle(center : Vector2i, radiusX : float, radiusY : float):
 	for x in range(left, right):
 		for y in range(top, bottom):
 			if inside_circle(center, Vector2(x, y), radiusX, radiusY): 
-				tileMap.set_cell(Vector2i(x, y), 0, Vector2i(0,1), 0)
+				var tileMap = LevelInfo.get_tile_map(tileMapName)
+				if(tileMap): tileMap.set_cell(Vector2i(x, y), 0, Vector2i(0,1), 0)
 				pass
 				# draw tile (x, y)
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	super._ready()
+	interactableType = "StormCloud"
 	pass # Replace with function body.
-
+func in_range(point : Vector2):
+	print(RadiusX, point, inside_circle(position, point, RadiusX*8, RadiusY*8))
+	return inside_circle(position, point, RadiusX*8, RadiusY*8)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
