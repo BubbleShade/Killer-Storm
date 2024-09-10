@@ -4,22 +4,31 @@
 [ext_resource type="Script" path="res://Script/person.gd" id="1_ukwst"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3hom5"]
-radius = 1.0
+radius = 2.0
 
 [node name="Person" type="CharacterBody2D"]
+collision_layer = 6
+motion_mode = 1
 script = ExtResource("1_ukwst")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_onx60")
-offset = Vector2(0.5, 0)
+offset = Vector2(0.5, -3)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 4)
 shape = SubResource("CircleShape2D_3hom5")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 target_desired_distance = 8.0
+path_max_distance = 50.0
+simplify_epsilon = 1.0
 avoidance_enabled = true
-radius = 8.0
+radius = 4.0
 neighbor_distance = 16.0
 max_neighbors = 4
+time_horizon_obstacles = 0.2
+max_speed = 50.0
+debug_enabled = true
+debug_use_custom = true
+debug_path_custom_color = Color(0.693658, 0.934179, 0.464663, 1)
+debug_path_custom_point_size = 1.0
