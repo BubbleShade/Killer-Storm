@@ -1,0 +1,48 @@
+[gd_scene load_steps=4 format=3 uid="uid://cqy86kml0xk0a"]
+
+[ext_resource type="Script" path="res://Script/UI/PauseMenu.gd" id="1_d0gmh"]
+[ext_resource type="Theme" uid="uid://dkkg58pviiiq" path="res://Menus.tres" id="1_u7o3k"]
+[ext_resource type="Script" path="res://Script/UI/buttons.gd" id="2_k5gy6"]
+
+[node name="PauseMenu" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_d0gmh")
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = 356.0
+offset_top = 51.0
+offset_right = 771.0
+offset_bottom = 632.0
+theme = ExtResource("1_u7o3k")
+
+[node name="Button" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 36.0
+offset_top = 153.0
+offset_right = 373.0
+offset_bottom = 222.0
+text = "Return to game
+"
+script = ExtResource("2_k5gy6")
+
+[node name="Restart" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 36.0
+offset_top = 233.0
+offset_right = 373.0
+offset_bottom = 302.0
+text = "Restart Level"
+script = ExtResource("2_k5gy6")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel"]
+layout_mode = 0
+offset_top = 48.0
+offset_right = 414.0
+offset_bottom = 118.0
+theme = ExtResource("1_u7o3k")
+bbcode_enabled = true
+text = "[center]Game Paused"
+scroll_active = false
+
+[connection signal="pressed" from="Panel/Button" to="." method="_unpause" flags=3]
+[connection signal="pressed" from="Panel/Restart" to="Panel/Restart" method="_restart_level"]

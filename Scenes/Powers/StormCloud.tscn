@@ -1,14 +1,29 @@
-[gd_scene load_steps=4 format=3 uid="uid://tmhgfvxtv5kw"]
+[gd_scene load_steps=6 format=3 uid="uid://tmhgfvxtv5kw"]
 
-[ext_resource type="Texture2D" uid="uid://cyx6w2ohep813" path="res://Assets/Storm_Cloud.png" id="1_idq82"]
+[ext_resource type="Texture2D" uid="uid://cyx6w2ohep813" path="res://Assets/Houses/Powers/Storm_Cloud.png" id="1_idq82"]
 [ext_resource type="Texture2D" uid="uid://baj4wfkr0650k" path="res://Assets/Circle.png" id="2_cm0nc"]
-[ext_resource type="Script" path="res://Script/Cloud.gd" id="2_uisnr"]
+[ext_resource type="Script" path="res://Script/Powers/Cloud.gd" id="2_uisnr"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_36xq2"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(16, 1, 1)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+gravity = Vector3(0, 98, 0)
+color = Color(0, 0.345098, 0.898039, 1)
+turbulence_enabled = true
+turbulence_influence_min = 0.0
+turbulence_influence_max = 0.05
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t6t5y"]
+size = Vector2(31, 9)
 
 [node name="StormCloud" type="Sprite2D"]
-z_index = 2
+z_index = 4
 texture = ExtResource("1_idq82")
 offset = Vector2(0, -10)
 script = ExtResource("2_uisnr")
+tileMapName = "Over"
 RadiusX = 8.0
 RadiusY = 6.0
 
@@ -16,7 +31,8 @@ RadiusY = 6.0
 modulate = Color(0, 0, 0, 0.12549)
 show_behind_parent = true
 z_index = 1
-scale = Vector2(0.12, 0.1)
+position = Vector2(0, 32)
+scale = Vector2(0.128, 0.096)
 texture = ExtResource("2_cm0nc")
 
 [node name="Drag" type="Button" parent="."]
@@ -29,3 +45,16 @@ theme_override_constants/outline_size = 0
 theme_override_constants/h_separation = 0
 theme_override_constants/icon_max_width = 0
 theme_override_constants/align_to_largest_stylebox = 0
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_36xq2")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-0.5, -4.5)
+shape = SubResource("RectangleShape2D_t6t5y")

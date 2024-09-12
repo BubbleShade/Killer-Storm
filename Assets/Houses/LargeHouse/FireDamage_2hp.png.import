@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://y16601mnob0y"
-path="res://.godot/imported/Lightning-Sheet.png-5243d633465cfb538af1c76929a37fe5.ctex"
+uid="uid://dcx4tsd8cjun4"
+path="res://.godot/imported/FireDamage_2hp.png-bc5dad0498368a2a84e06d2f030eb81a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Lightning-Sheet.png"
-dest_files=["res://.godot/imported/Lightning-Sheet.png-5243d633465cfb538af1c76929a37fe5.ctex"]
+source_file="res://Assets/Houses/LargeHouse/FireDamage_2hp.png"
+dest_files=["res://.godot/imported/FireDamage_2hp.png-bc5dad0498368a2a84e06d2f030eb81a.ctex"]
 
 [params]
 

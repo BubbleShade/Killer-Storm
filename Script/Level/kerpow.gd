@@ -1,7 +1,7 @@
 extends Node2D
 
 var previewScene
-var preview
+var preview : Node2D
 
 func _ready() -> void:
 	LevelInfo.selected_power_changed.connect(on_power_change)
@@ -19,10 +19,12 @@ func on_power_change():
 func on_summon():
 	if(LevelInfo.selected_power == "none"): return
 	var mouse_pos = get_global_mouse_position()
-	var newInteractable : Cloud = previewScene.instantiate()
+	var newInteractable : Interactable = previewScene.instantiate()
 	get_tree().current_scene.add_child(newInteractable)
-	newInteractable.position = mouse_pos
+	newInteractable.position = preview.position
+	newInteractable.rotation = preview.rotation
 	newInteractable.start()
+	LevelInfo.power_added_to_map.emit(LevelInfo.selected_power)
 	
 	LevelInfo.change_power("none")
 	return
@@ -33,15 +35,23 @@ func _process(delta: float) -> void:
 func _input(event):
 	# Mouse in viewport coordinates.
 	if event is InputEventMouseButton:
-		if event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-			var mouse_pos = get_global_mouse_position()
-			#print("Mouse Click/Unclick at: ", mouse_pos)
-			if(!LevelInfo.started):
-				on_summon()
-			else:
-				if(LevelInfo.selected_power == "Lightning"):
-					for i : Interactable in LevelInfo.get_level_handler().hazards:
-						print(i.interactableType == "StormCloud")
-						if(i.interactableType == "StormCloud" and i.in_range(get_global_mouse_position())):
-							Lightning.summon(get_tree().current_scene, get_global_mouse_position())
-							return
+		if event.pressed:
+			if event.button_index == MOUSE_BUTTON_LEFT:
+				if(get_local_mouse_position().y > 130): return
+				var mouse_pos = get_global_mouse_position()
+				#print("Mouse Click/Unclick at: ", mouse_pos)
+				if(!LevelInfo.started):
+					on_summon()
+				else:
+					if(LevelInfo.selected_power == "Lightning"):
+						for i : Interactable in LevelInfo.get_level_handler().hazards:
+							if(i.interactableType == "StormCloud" and i.in_range(get_global_mouse_position())):
+								LevelInfo.power_added_to_map.emit(LevelInfo.selected_power)
+								Lightning.summon(get_tree().current_scene, get_global_mouse_position())
+								return
+			if event.button_index == MOUSE_BUTTON_WHEEL_UP:
+				if(preview && preview.rotatable):
+					preview.rotate(-PI/20)
+			if event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+				if(preview && preview.rotatable):
+					preview.rotate(PI/20)

@@ -1,7 +1,7 @@
 [gd_scene load_steps=17 format=3 uid="uid://c4i4dwrs5rawn"]
 
-[ext_resource type="Texture2D" uid="uid://y16601mnob0y" path="res://Assets/Lightning-Sheet.png" id="1_kr5v8"]
-[ext_resource type="Script" path="res://Script/lightning.gd" id="2_37kyp"]
+[ext_resource type="Texture2D" uid="uid://y16601mnob0y" path="res://Assets/Houses/Powers/Lightning-Sheet.png" id="1_kr5v8"]
+[ext_resource type="Script" path="res://Script/Powers/lightning.gd" id="2_37kyp"]
 [ext_resource type="Material" uid="uid://v6qbwxwq7m1n" path="res://LightningExplosion.tres" id="3_rgg3d"]
 [ext_resource type="Texture2D" uid="uid://bg7u6hpbmb1jm" path="res://Assets/lightning_crater.png" id="4_uld17"]
 [ext_resource type="Script" path="res://Scenes/Powers/crater.gd" id="5_ohu3r"]
@@ -81,7 +81,7 @@ animations = [{
 radius = 4.0
 
 [node name="Lightning" type="AnimatedSprite2D"]
-z_index = 2
+z_index = 4
 sprite_frames = SubResource("SpriteFrames_mniuq")
 autoplay = "default"
 frame = 8

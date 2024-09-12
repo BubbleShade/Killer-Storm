@@ -6,9 +6,12 @@ extends CharacterBody2D
 @export var loitering  = 0.5
 
 @onready var nav_agent : NavigationAgent2D = $NavigationAgent2D 
+var person = true
 var invulnerability = 0.1
 var pathing = false
+var paused = false
 var randDirection
+
 func AI_game_started():
 	var levelHandler : LevelHandler = LevelInfo.get_level_handler()
 	var choseHouse
@@ -27,18 +30,22 @@ func AI_game_started():
 func AI_before_game_start():
 	var levelHandler : LevelHandler = LevelInfo.get_level_handler()
 	var house
-	
+	if(len(levelHandler.houses) <= 0): return
 	while true: 
 		house = levelHandler.houses.pick_random()
 		if(position.distance_to(house.position) > 4): break
-	print(house)
 	target_object = house
 	make_path()
+var walk_anim_time = 0
 func run_AI(delta):
 	if(pathing):
+		walk_anim_time += delta
+		rotation = sin(walk_anim_time*speed*0.5)/4
 		if(target_object and target_object.destroyed):
 			target_object = null
 		else: return
+	walk_anim_time = 0
+	rotation = 0
 	if(LevelInfo.started):
 		AI_game_started()
 		return
@@ -79,10 +86,12 @@ func _ready() -> void:
 	nav_agent.target_reached.connect(on_reach)
 
 func _physics_process(_delta:float):
+	if(paused): return
 	run_AI(_delta)
 	_follow_path(_delta)
 var time_since_repath = 0.1
 func _process(delta: float) -> void:
+	if(paused): return
 	invulnerability -= delta
 	time_since_repath -= delta
 	if(time_since_repath <= 0 and target_object and pathing):
@@ -107,6 +116,39 @@ func path_to(pos : Vector2):
 	nav_agent.target_position = pos
 	pathing = true
 
+func blast():
+	velocity = Vector2.from_angle(randf() * TAU) * randf_range(40,50)/2
+	var delta
+	var timePassed = 0
+	paused = true
+	var rotateDir = 1
+	if(velocity.x < 0): rotateDir = -1
+	while timePassed < 1:
+		
+		invulnerability = 1
+		delta = get_physics_process_delta_time()
+		timePassed += delta
+		velocity = velocity.move_toward(Vector2(0,0), delta*50)
+		rotation = move_toward(rotation, (PI/2) * rotateDir, delta*10)
+		modulate.a -= delta
+		move_and_slide()
+		await get_tree().physics_frame
+	queue_free()
+	var levelHandler : LevelHandler = LevelInfo.get_level_handler()
+	levelHandler.destruction += 1
 func damage(power):
 	if(invulnerability <= 0):
+		invulnerability = 0.5
+		blast()
+func can_destroy():
+	if(invulnerability <= 0):
+		return true
+	return false
+func destroy(power):
+	if(invulnerability <= 0):
+		invulnerability = 0.5
+		var levelHandler : LevelHandler = LevelInfo.get_level_handler()
+		levelHandler.destruction += 1
 		queue_free()
+		return true
+	return false

@@ -1,0 +1,101 @@
+[gd_scene load_steps=13 format=3 uid="uid://drx8e00t3jrjx"]
+
+[ext_resource type="Texture2D" uid="uid://dq7k1h07ssvtm" path="res://Assets/Tornado.png" id="1_tewsh"]
+[ext_resource type="Script" path="res://Script/Powers/Tornado.gd" id="2_3vfa1"]
+[ext_resource type="Texture2D" uid="uid://baj4wfkr0650k" path="res://Assets/Circle.png" id="2_ngb10"]
+[ext_resource type="Texture2D" uid="uid://bogisb0wsew4c" path="res://Assets/Debris.png" id="4_whihq"]
+[ext_resource type="Script" path="res://Scenes/Powers/Debris.gd" id="5_vv7vf"]
+
+[sub_resource type="Gradient" id="Gradient_heghw"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_dwk8a"]
+gradient = SubResource("Gradient_heghw")
+
+[sub_resource type="Curve" id="Curve_d5w1c"]
+min_value = -200.0
+max_value = 200.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_f55f0"]
+curve = SubResource("Curve_d5w1c")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1cqym"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(0, -10, 0)
+emission_shape = 3
+emission_box_extents = Vector3(0, 10, 1)
+orbit_velocity_min = -1.0
+orbit_velocity_max = 9.49949e-08
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -2.23517e-06
+radial_accel_max = -2.23517e-06
+tangential_accel_min = 10.0
+tangential_accel_max = 20.0
+tangential_accel_curve = SubResource("CurveTexture_f55f0")
+color = Color(0.43134, 0.43134, 0.43134, 1)
+color_ramp = SubResource("GradientTexture1D_dwk8a")
+turbulence_enabled = true
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jh2r6"]
+radius = 25.0408
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ydwmg"]
+size = Vector2(8, 18.5714)
+
+[node name="Tornado" type="Sprite2D"]
+z_index = 4
+texture = ExtResource("1_tewsh")
+offset = Vector2(-4.5, -16)
+flip_h = true
+script = ExtResource("2_3vfa1")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(-8, -13)
+emitting = false
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_1cqym")
+
+[node name="Drag" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
+offset_left = -17.0
+offset_top = -31.0
+offset_right = 10.0
+offset_bottom = -1.0
+
+[node name="DestroyArea" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DestroyArea"]
+position = Vector2(0, -6)
+scale = Vector2(1, 0.7)
+shape = SubResource("CircleShape2D_jh2r6")
+
+[node name="WindArea" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 8
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WindArea"]
+position = Vector2(-2, -16.5)
+scale = Vector2(1, 0.7)
+shape = SubResource("RectangleShape2D_ydwmg")
+
+[node name="Zone" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 0.0862745)
+z_index = -2
+position = Vector2(0, -6)
+scale = Vector2(0.05, 0.036)
+texture = ExtResource("2_ngb10")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(4, 4)
+
+[node name="Debris" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-22, -12)
+texture = ExtResource("4_whihq")
+script = ExtResource("5_vv7vf")

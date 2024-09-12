@@ -1,8 +1,15 @@
 extends Building
 
+var toHouse = "res://Assets/Houses/LargeHouse/"
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	destroySprite = load("res://Assets/SmallHouseDestroyFire.png")
+	destroySprite = load("res://Assets/Houses/LargeHouse/FireDamage_destroyed.png")
+	spriteTable = {
+		"Fire2": load("res://Assets/Houses/LargeHouse/FireDamage_2hp.png"),
+		"Fire1": load("res://Assets/Houses/LargeHouse/FireDamage_1hp.png"),
+		"Fire0": load("res://Assets/Houses/LargeHouse/FireDamage_destroyed.png")
+	}
 	levelHandler.houses.append(self)
 	super._ready()
 	pass # Replace with function body.

@@ -1,0 +1,152 @@
+[gd_scene load_steps=7 format=3 uid="uid://cp2fwv8hxhnys"]
+
+[ext_resource type="Script" path="res://Script/Level/level_ui.gd" id="1_h7ist"]
+[ext_resource type="Texture2D" uid="uid://cqf10l2aopykw" path="res://Assets/Start.png" id="2_0f567"]
+[ext_resource type="Theme" uid="uid://cpm0uo3c8msol" path="res://Scenes/Level/LevelUI.tres" id="2_821gn"]
+[ext_resource type="Texture2D" uid="uid://cyx6w2ohep813" path="res://Assets/Houses/Powers/Storm_Cloud.png" id="3_ixcrv"]
+[ext_resource type="Texture2D" uid="uid://8x6t2d6eosvt" path="res://Assets/Houses/Powers/Lightning.png" id="4_ro6mu"]
+[ext_resource type="Texture2D" uid="uid://bg58qwhqpnmvs" path="res://Assets/Houses/Powers/Wind1.png" id="4_ts18j"]
+
+[node name="LevelUI" type="CanvasLayer"]
+script = ExtResource("1_h7ist")
+storm = true
+enabledButtons = {
+"StormCloud": 1
+}
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = 2.0
+offset_top = 544.0
+offset_right = 1147.0
+offset_bottom = 647.0
+theme = ExtResource("2_821gn")
+
+[node name="MenuBar" type="MenuBar" parent="Panel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
+layout_mode = 0
+offset_left = 4.0
+offset_right = 1073.0
+offset_bottom = 100.0
+
+[node name="StormCloud" type="Button" parent="Panel/HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+toggle_mode = true
+icon = ExtResource("3_ixcrv")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Amount" type="RichTextLabel" parent="Panel/HBoxContainer/StormCloud"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 75.0
+offset_right = 99.0
+offset_bottom = 101.0
+theme_override_font_sizes/mono_font_size = 20
+theme_override_font_sizes/normal_font_size = 20
+text = "100"
+scroll_active = false
+
+[node name="Wind1" type="Button" parent="Panel/HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+toggle_mode = true
+icon = ExtResource("4_ts18j")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Amount" type="RichTextLabel" parent="Panel/HBoxContainer/Wind1"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 75.0
+offset_right = 99.0
+offset_bottom = 101.0
+theme_override_font_sizes/mono_font_size = 20
+theme_override_font_sizes/normal_font_size = 20
+text = "100"
+scroll_active = false
+
+[node name="Lightning" type="Button" parent="Panel/HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+toggle_mode = true
+icon = ExtResource("4_ro6mu")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Amount" type="RichTextLabel" parent="Panel/HBoxContainer/Lightning"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 75.0
+offset_right = 99.0
+offset_bottom = 101.0
+theme_override_font_sizes/mono_font_size = 20
+theme_override_font_sizes/normal_font_size = 20
+text = "100"
+scroll_active = false
+
+[node name="Button3" type="Button" parent="Panel/HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+toggle_mode = true
+icon = ExtResource("3_ixcrv")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Amount" type="RichTextLabel" parent="Panel/HBoxContainer/Button3"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 75.0
+offset_right = 99.0
+offset_bottom = 101.0
+theme_override_font_sizes/mono_font_size = 20
+theme_override_font_sizes/normal_font_size = 20
+text = "100"
+scroll_active = false
+
+[node name="StartButton" type="TextureButton" parent="."]
+offset_left = 1061.0
+offset_top = 567.0
+offset_right = 1069.0
+offset_bottom = 575.0
+scale = Vector2(8, 8)
+texture_normal = ExtResource("2_0f567")
+
+[node name="Display" type="Panel" parent="."]
+offset_left = 1030.0
+offset_top = 5.0
+offset_right = 1146.0
+offset_bottom = 146.0
+theme = ExtResource("2_821gn")
+
+[node name="Destruction" type="RichTextLabel" parent="Display"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 90.0
+offset_right = 112.0
+offset_bottom = 134.0
+theme = ExtResource("2_821gn")
+text = "Destruction:
+0%
+"
+scroll_active = false
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Display"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 5.0
+offset_right = 112.0
+offset_bottom = 49.0
+theme = ExtResource("2_821gn")
+text = "Storm Points:
+0
+"
+scroll_active = false

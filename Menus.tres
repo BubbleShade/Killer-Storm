@@ -1,0 +1,33 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://dkkg58pviiiq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_soydq"]
+bg_color = Color(0.1246, 0.134867, 0.14, 0.784314)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.747274, 1, 0.945452, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vfxlu"]
+bg_color = Color(0.0504, 0.06, 0.05584, 0.784314)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.5135, 0.65, 0.647725, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[resource]
+Button/colors/font_color = Color(0.649959, 1, 0.943285, 1)
+Button/font_sizes/font_size = 32
+Button/styles/normal = SubResource("StyleBoxFlat_soydq")
+Panel/styles/panel = SubResource("StyleBoxFlat_vfxlu")
+RichTextLabel/colors/default_color = Color(0.94, 1, 0.998, 1)
+RichTextLabel/font_sizes/normal_font_size = 48

@@ -17,14 +17,14 @@ static func summon(current_scene : Node, Pos : Vector2) -> Lightning:
 
 # Called when the node enters the scene tree for the first time.
 func ready() -> void:
-	#print(position, " - ", path.local_to_map(position))
-	
+	AudioHandler.play_audio(AudioHandler.LightningExplosion)
 	area.area_entered.connect(on_area_entered)
 	area.body_entered.connect(destroy)
 	animation_finished.connect(on_animation_end)
 
 func on_animation_end():
 	area.monitoring = true
+	get_tree().create_timer(0.1).timeout.connect(func(): area.monitoring = false)
 	fading = true
 	lightningExplosion.emitting = true
 	
@@ -35,26 +35,17 @@ func on_animation_end():
 	crater.fade_after(1)
 	
 	var path := LevelInfo.get_tile_map("Path")
-	path.set_cell(path.local_to_map(position), -1)
+	var pos = path.local_to_map(position)
+	path.set_cells_terrain_connect([pos], 0, -1)
+	path.set_cell(pos, -1)
 	
-	#remove_child(lightningExplosion)
-	#get_tree().current_scene.add_child(lightningExplosion)
+	while(modulate.a > 0):
+		modulate.a -= get_process_delta_time()
+		await get_tree().process_frame
+	queue_free()
 
 func destroy(body):
 	body.damage(1)
-	area.monitoring = false
-	print("Killed")
+	
 func on_area_entered(area):
 	destroy(area.get_parent())
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	if(fading):
-		modulate.a -= delta
-		if(modulate.a <= 0):
-			queue_free()
-
-	
-
-
-	

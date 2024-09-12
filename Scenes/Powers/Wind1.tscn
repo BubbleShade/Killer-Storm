@@ -1,0 +1,36 @@
+[gd_scene load_steps=4 format=3 uid="uid://dkc0seybnos6c"]
+
+[ext_resource type="Texture2D" uid="uid://bg58qwhqpnmvs" path="res://Assets/Houses/Powers/Wind1.png" id="1_vs407"]
+[ext_resource type="Script" path="res://Script/Powers/wind1.gd" id="2_m21yg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4434n"]
+size = Vector2(24.3333, 24)
+
+[node name="Wind1" type="Sprite2D"]
+scale = Vector2(3, 3)
+texture = ExtResource("1_vs407")
+offset = Vector2(-0.5, 0)
+script = ExtResource("2_m21yg")
+rotatable = true
+
+[node name="Drag" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(1, 1, 1, 0)
+offset_left = -5.0
+offset_top = -3.33333
+offset_right = 5.0
+offset_bottom = 4.66667
+theme_override_constants/outline_size = 0
+theme_override_constants/h_separation = 0
+theme_override_constants/icon_max_width = 0
+theme_override_constants/align_to_largest_stylebox = 0
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 8
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_4434n")
