@@ -1,6 +1,65 @@
-[gd_scene load_steps=5 format=3 uid="uid://b87wc74vpce2n"]
+[gd_scene load_steps=12 format=3 uid="uid://b87wc74vpce2n"]
 
 [ext_resource type="Script" path="res://Script/UI/scene_transition.gd" id="1_flp0c"]
+[ext_resource type="Material" uid="uid://bau44tcqarroe" path="res://OtherAssets/Particles/Tornado.tres" id="2_hpcyu"]
+[ext_resource type="Theme" uid="uid://dkkg58pviiiq" path="res://OtherAssets/Menus.tres" id="2_jjy6e"]
+[ext_resource type="Material" uid="uid://bjh0qwh6ie217" path="res://OtherAssets/Particles/StormCloud.tres" id="3_df11a"]
+[ext_resource type="Texture2D" uid="uid://bvdjgecwiwlg0" path="res://Assets/Powers/Meteor.png" id="3_nsfu2"]
+[ext_resource type="Material" uid="uid://v6qbwxwq7m1n" path="res://OtherAssets/Particles/LightningExplosion.tres" id="4_ym5ad"]
+
+[sub_resource type="Animation" id="Animation_27vbs"]
+resource_name = "DropDown"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.766667, 1),
+"transitions": PackedFloat32Array(2, 0.5, 2, 1),
+"update": 0,
+"values": [Vector2(0, -656), Vector2(0, 0), Vector2(0, -56), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect2:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_o5lo0"]
+resource_name = "DropDownRevers"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -660)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect2:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
 
 [sub_resource type="Animation" id="Animation_2um0g"]
 resource_name = "Fade"
@@ -53,25 +112,110 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ColorRect2:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ColorRect2:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6r2vy"]
 _data = {
+"DropDown": SubResource("Animation_27vbs"),
+"DropDownReverse": SubResource("Animation_o5lo0"),
 "Fade": SubResource("Animation_2um0g"),
 "RESET": SubResource("Animation_xsqxn")
 }
 
 [node name="SceneTransition" type="CanvasLayer"]
+auto_translate_mode = 1
 layer = 20
 script = ExtResource("1_flp0c")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 offset_right = 1152.0
 offset_bottom = 648.0
 color = Color(0, 0, 0, 1)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+process_mode = 3
 libraries = {
 "": SubResource("AnimationLibrary_6r2vy")
 }
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+visible = false
+offset_right = 1157.0
+offset_bottom = 652.0
+color = Color(7.52043e-09, 0.0618262, 0.0559903, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ColorRect2"]
+layout_mode = 0
+offset_left = 388.0
+offset_top = 542.0
+offset_right = 898.0
+offset_bottom = 632.0
+theme = ExtResource("2_jjy6e")
+theme_override_font_sizes/normal_font_size = 64
+text = "Loading..."
+
+[node name="LoadingBar" type="ProgressBar" parent="ColorRect2"]
+visible = false
+layout_mode = 0
+offset_right = 4.0
+offset_bottom = 27.0
+
+[node name="TextureRect" type="TextureRect" parent="ColorRect2"]
+layout_mode = 0
+offset_left = 363.0
+offset_top = 66.0
+offset_right = 763.0
+offset_bottom = 466.0
+pivot_offset = Vector2(200, 200)
+texture = ExtResource("3_nsfu2")
+
+[node name="Node" type="Node" parent="."]
+
+[node name="Particle" type="GPUParticles2D" parent="Node"]
+z_index = -100
+position = Vector2(560, 236)
+emitting = false
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Node"]
+z_index = -100
+position = Vector2(560, 236)
+emitting = false
+process_material = ExtResource("2_hpcyu")
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="Node"]
+z_index = -100
+position = Vector2(560, 236)
+emitting = false
+process_material = ExtResource("3_df11a")
+
+[node name="GPUParticles2D3" type="GPUParticles2D" parent="Node"]
+z_index = -100
+position = Vector2(560, 236)
+emitting = false
+process_material = ExtResource("4_ym5ad")

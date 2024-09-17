@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://y16601mnob0y" path="res://Assets/Houses/Powers/Lightning-Sheet.png" id="1_kr5v8"]
 [ext_resource type="Script" path="res://Script/Powers/lightning.gd" id="2_37kyp"]
-[ext_resource type="Material" uid="uid://v6qbwxwq7m1n" path="res://LightningExplosion.tres" id="3_rgg3d"]
+[ext_resource type="Material" uid="uid://v6qbwxwq7m1n" path="res://OtherAssets/Particles/LightningExplosion.tres" id="3_rgg3d"]
 [ext_resource type="Texture2D" uid="uid://bg7u6hpbmb1jm" path="res://Assets/lightning_crater.png" id="4_uld17"]
 [ext_resource type="Script" path="res://Scenes/Powers/crater.gd" id="5_ohu3r"]
 

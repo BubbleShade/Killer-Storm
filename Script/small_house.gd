@@ -4,11 +4,13 @@ extends Building
 func _ready() -> void:
 	destroySprite = load("res://Assets/SmallHouseDestroyFire.png")
 	levelHandler.houses.append(self)
+	levelHandler.buildings.append(self)
 	super._ready()
 	pass # Replace with function body.
 func destroy():
 	super.destroy()
 	levelHandler.houses.remove_at(levelHandler.houses.find(self))
+	levelHandler.buildings.remove_at(levelHandler.buildings.find(self))
 	#print(get_tree().current_scene.get_node("LevelHandler"))
 	levelHandler.spawnGuyFromDestroyedHouse(self)
 

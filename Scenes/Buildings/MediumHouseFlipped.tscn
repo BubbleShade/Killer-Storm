@@ -1,15 +1,21 @@
-[gd_scene load_steps=4 format=3 uid="uid://3yapmtj4u7gn"]
+[gd_scene load_steps=4 format=3 uid="uid://dhe13wflx5r8"]
 
-[ext_resource type="Texture2D" uid="uid://bfqfe3jr8gsm8" path="res://Assets/SmallHouse.png" id="1_j4tix"]
-[ext_resource type="Script" path="res://Script/small_house.gd" id="2_4hsye"]
+[ext_resource type="Texture2D" uid="uid://dsetcmpko8526" path="res://Assets/Houses/LargeHouse/Undamaged.png" id="1_4k1o2"]
+[ext_resource type="Script" path="res://Script/medium_house.gd" id="2_eq17a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gi7rh"]
 size = Vector2(13, 5.5)
 
-[node name="SmallHouse" type="Sprite2D"]
-texture = ExtResource("1_j4tix")
-offset = Vector2(-1.5, -4)
-script = ExtResource("2_4hsye")
+[node name="MediumHouse" type="Sprite2D"]
+z_index = 2
+y_sort_enabled = true
+texture = ExtResource("1_4k1o2")
+offset = Vector2(3.5, -8)
+flip_h = true
+script = ExtResource("2_eq17a")
+hp = 3
+people = 3
+destructionValue = 3
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 2
@@ -17,5 +23,5 @@ collision_mask = 2
 monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-1.5, -2.25)
+position = Vector2(4, -3)
 shape = SubResource("RectangleShape2D_gi7rh")

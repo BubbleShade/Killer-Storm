@@ -1,21 +1,22 @@
-[gd_scene load_steps=11 format=3 uid="uid://cp2fwv8hxhnys"]
+[gd_scene load_steps=15 format=3 uid="uid://cp2fwv8hxhnys"]
 
 [ext_resource type="Script" path="res://Script/Level/level_ui.gd" id="1_h7ist"]
 [ext_resource type="Texture2D" uid="uid://cqf10l2aopykw" path="res://Assets/Start.png" id="2_0f567"]
-[ext_resource type="Theme" uid="uid://cpm0uo3c8msol" path="res://Scenes/Level/LevelUI.tres" id="2_821gn"]
+[ext_resource type="Theme" uid="uid://cpm0uo3c8msol" path="res://OtherAssets/LevelUI.tres" id="2_821gn"]
 [ext_resource type="Texture2D" uid="uid://cyx6w2ohep813" path="res://Assets/Houses/Powers/Storm_Cloud.png" id="3_ixcrv"]
 [ext_resource type="Texture2D" uid="uid://dq7k1h07ssvtm" path="res://Assets/Tornado.png" id="4_jydgj"]
+[ext_resource type="Script" path="res://Script/UI/ToggleButton.gd" id="4_q5f5d"]
 [ext_resource type="Texture2D" uid="uid://8x6t2d6eosvt" path="res://Assets/Houses/Powers/Lightning.png" id="4_ro6mu"]
 [ext_resource type="Texture2D" uid="uid://bg58qwhqpnmvs" path="res://Assets/Houses/Powers/Wind1.png" id="4_ts18j"]
 [ext_resource type="Texture2D" uid="uid://orbfft38qrd6" path="res://Assets/StarFull.png" id="7_3viql"]
 [ext_resource type="Texture2D" uid="uid://cs2au57c70cwr" path="res://Assets/Stop.png" id="7_55pdf"]
-[ext_resource type="Theme" uid="uid://dkkg58pviiiq" path="res://Menus.tres" id="8_83r8k"]
+[ext_resource type="Texture2D" uid="uid://dl6v3lccybx3f" path="res://Assets/Powers/TsunamiIcon.png" id="7_p672l"]
+[ext_resource type="Theme" uid="uid://dkkg58pviiiq" path="res://OtherAssets/Menus.tres" id="8_83r8k"]
+[ext_resource type="Script" path="res://Script/UI/NextButton.gd" id="13_474lm"]
+[ext_resource type="Script" path="res://Script/UI/Restart.gd" id="14_lsm44"]
 
 [node name="LevelUI" type="CanvasLayer"]
 script = ExtResource("1_h7ist")
-star1Threshold = 10.0
-star2Threshold = 60.0
-star3Threshold = 100.0
 
 [node name="Panel" type="Panel" parent="."]
 offset_left = 2.0
@@ -43,6 +44,7 @@ toggle_mode = true
 icon = ExtResource("3_ixcrv")
 icon_alignment = 1
 expand_icon = true
+script = ExtResource("4_q5f5d")
 
 [node name="Amount" type="RichTextLabel" parent="Panel/HBoxContainer/StormCloud"]
 layout_mode = 0
@@ -76,6 +78,7 @@ toggle_mode = true
 icon = ExtResource("4_ts18j")
 icon_alignment = 1
 expand_icon = true
+script = ExtResource("4_q5f5d")
 
 [node name="Amount" type="RichTextLabel" parent="Panel/HBoxContainer/Wind1"]
 layout_mode = 0
@@ -89,6 +92,7 @@ text = "100"
 scroll_active = false
 
 [node name="TemperCost" type="RichTextLabel" parent="Panel/HBoxContainer/Wind1"]
+layout_mode = 0
 offset_left = 1.0
 offset_top = -2.0
 offset_right = 95.0
@@ -108,6 +112,7 @@ toggle_mode = true
 icon = ExtResource("4_jydgj")
 icon_alignment = 1
 expand_icon = true
+script = ExtResource("4_q5f5d")
 
 [node name="Amount" type="RichTextLabel" parent="Panel/HBoxContainer/Tornado"]
 layout_mode = 0
@@ -141,6 +146,7 @@ toggle_mode = true
 icon = ExtResource("4_ro6mu")
 icon_alignment = 1
 expand_icon = true
+script = ExtResource("4_q5f5d")
 
 [node name="Amount" type="RichTextLabel" parent="Panel/HBoxContainer/Lightning"]
 layout_mode = 0
@@ -154,6 +160,41 @@ text = "100"
 scroll_active = false
 
 [node name="TemperCost" type="RichTextLabel" parent="Panel/HBoxContainer/Lightning"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = -2.0
+offset_right = 95.0
+offset_bottom = 24.0
+theme_override_colors/default_color = Color(1, 0.857648, 0.886801, 1)
+theme_override_font_sizes/mono_font_size = 20
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "[right]100"
+scroll_active = false
+
+[node name="Tsunami" type="Button" parent="Panel/HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+toggle_mode = true
+icon = ExtResource("7_p672l")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("4_q5f5d")
+
+[node name="Amount" type="RichTextLabel" parent="Panel/HBoxContainer/Tsunami"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 75.0
+offset_right = 103.0
+offset_bottom = 101.0
+theme_override_font_sizes/mono_font_size = 20
+theme_override_font_sizes/normal_font_size = 20
+text = "100"
+scroll_active = false
+
+[node name="TemperCost" type="RichTextLabel" parent="Panel/HBoxContainer/Tsunami"]
+layout_mode = 0
 offset_left = 1.0
 offset_top = -2.0
 offset_right = 95.0
@@ -166,6 +207,7 @@ text = "[right]100"
 scroll_active = false
 
 [node name="StartButton" type="TextureButton" parent="Panel"]
+layout_mode = 0
 offset_left = 1059.0
 offset_top = 23.0
 offset_right = 1067.0
@@ -175,6 +217,7 @@ texture_normal = ExtResource("2_0f567")
 
 [node name="StopButton" type="TextureButton" parent="Panel"]
 visible = false
+layout_mode = 0
 offset_left = 1059.0
 offset_top = 23.0
 offset_right = 1067.0
@@ -282,6 +325,7 @@ offset_right = 453.0
 offset_bottom = 539.0
 theme = ExtResource("8_83r8k")
 text = "Next"
+script = ExtResource("13_474lm")
 
 [node name="Restart" type="Button" parent="EndScreen"]
 layout_mode = 0
@@ -291,6 +335,7 @@ offset_right = 146.0
 offset_bottom = 539.0
 theme = ExtResource("8_83r8k")
 text = "Restart"
+script = ExtResource("14_lsm44")
 
 [connection signal="pressed" from="Panel/StopButton" to="." method="stop_button_pressed"]
 [connection signal="pressed" from="EndScreen/Next" to="." method="next_level"]

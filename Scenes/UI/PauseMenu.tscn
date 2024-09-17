@@ -1,11 +1,12 @@
 [gd_scene load_steps=4 format=3 uid="uid://cqy86kml0xk0a"]
 
 [ext_resource type="Script" path="res://Script/UI/PauseMenu.gd" id="1_d0gmh"]
-[ext_resource type="Theme" uid="uid://dkkg58pviiiq" path="res://Menus.tres" id="1_u7o3k"]
+[ext_resource type="Theme" uid="uid://dkkg58pviiiq" path="res://OtherAssets/Menus.tres" id="1_u7o3k"]
 [ext_resource type="Script" path="res://Script/UI/buttons.gd" id="2_k5gy6"]
 
 [node name="PauseMenu" type="CanvasLayer"]
 process_mode = 3
+layer = 20
 script = ExtResource("1_d0gmh")
 
 [node name="Panel" type="Panel" parent="."]
@@ -28,10 +29,30 @@ script = ExtResource("2_k5gy6")
 [node name="Restart" type="Button" parent="Panel"]
 layout_mode = 0
 offset_left = 36.0
-offset_top = 233.0
+offset_top = 257.0
 offset_right = 373.0
-offset_bottom = 302.0
+offset_bottom = 326.0
 text = "Restart Level"
+script = ExtResource("2_k5gy6")
+
+[node name="Settings" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 36.0
+offset_top = 361.0
+offset_right = 373.0
+offset_bottom = 430.0
+text = "Settings
+"
+script = ExtResource("2_k5gy6")
+
+[node name="LevelSelect" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 36.0
+offset_top = 465.0
+offset_right = 373.0
+offset_bottom = 534.0
+text = "Level Select
+"
 script = ExtResource("2_k5gy6")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Panel"]
@@ -46,3 +67,5 @@ scroll_active = false
 
 [connection signal="pressed" from="Panel/Button" to="." method="_unpause" flags=3]
 [connection signal="pressed" from="Panel/Restart" to="Panel/Restart" method="_restart_level"]
+[connection signal="pressed" from="Panel/Settings" to="Panel/Settings" method="_on_settings_pressed_pause"]
+[connection signal="pressed" from="Panel/LevelSelect" to="Panel/LevelSelect" method="_switch_menu" binds= ["LevelSelect", "LevelSelect", "PauseMenu"]]

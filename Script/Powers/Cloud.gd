@@ -6,8 +6,12 @@ class_name Cloud
 @export var RadiusY : float
 @onready var Zone : Sprite2D = $Zone
 
-func onDrag(): Zone.visible = true
-func onDragEnd(): Zone.visible = false
+func onDrag(): 
+	super.onDrag()
+	Zone.visible = true
+func onDragEnd():
+	super.onDragEnd()
+	Zone.visible = false
 func on_start(): $GPUParticles2D.emitting = true
 func on_stop():
 	$GPUParticles2D.emitting = false
@@ -25,6 +29,8 @@ func inside_circle(center : Vector2, tile : Vector2, radiusX : float, radiusY : 
 	return distance <= radiusX * radiusX;
 func getCircle(center : Vector2i, radiusX : float, radiusY : float):
 	var tileMap = LevelInfo.get_tile_map(tileMapName)
+	var grassTileMap = LevelInfo.get_tile_map("Grass")
+	if(!tileMap): return
 	var top    =  floor(center.y - radiusY) -1
 	var bottom = ceil(center.y + radiusY) + 1
 	var left   =  floor(center.x - radiusX) -1
@@ -32,7 +38,8 @@ func getCircle(center : Vector2i, radiusX : float, radiusY : float):
 	for x in range(left, right):
 		for y in range(top, bottom):
 			if inside_circle(center, Vector2(x, y), radiusX, radiusY): 
-				if(tileMap): tileMap.set_cell(Vector2i(x, y), 0, Vector2i(0,1), 0)
+				var grassCell = grassTileMap.get_cell_atlas_coords(Vector2i(x,y))
+				if(grassCell.y == 0 && grassCell.x < 4): tileMap.set_cell(Vector2i(x, y), 0, Vector2i(0,1), 0)
 				pass
 				# draw tile (x, y)
 

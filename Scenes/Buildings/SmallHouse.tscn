@@ -8,6 +8,7 @@ size = Vector2(9, 5.5)
 
 [node name="SmallHouse" type="Sprite2D"]
 z_index = 2
+y_sort_enabled = true
 texture = ExtResource("1_8gtid")
 offset = Vector2(-1.5, -4)
 script = ExtResource("2_n5mv3")

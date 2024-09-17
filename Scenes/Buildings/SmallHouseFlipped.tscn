@@ -8,6 +8,7 @@ size = Vector2(8.5, 5.5)
 
 [node name="SmallHouse" type="Sprite2D"]
 z_index = 2
+y_sort_enabled = true
 texture = ExtResource("1_37iw3")
 offset = Vector2(1.5, -4)
 flip_h = true

@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://t2c7rebo0653"]
+
+[ext_resource type="Material" uid="uid://c8j1mmkw0so0k" path="res://OtherAssets/Particles/Explosion.tres" id="1_idq3p"]
+[ext_resource type="Material" uid="uid://bau44tcqarroe" path="res://OtherAssets/Particles/Tornado.tres" id="2_h4ij2"]
+[ext_resource type="Material" uid="uid://bjh0qwh6ie217" path="res://OtherAssets/Particles/StormCloud.tres" id="3_6oolf"]
+[ext_resource type="Material" uid="uid://v6qbwxwq7m1n" path="res://OtherAssets/Particles/LightningExplosion.tres" id="4_mgggq"]
+
+[node name="ParticleScene" type="Node2D"]
+
+[node name="Particle" type="GPUParticles2D" parent="."]
+z_index = -100
+position = Vector2(560, 236)
+process_material = ExtResource("1_idq3p")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+z_index = -100
+position = Vector2(560, 236)
+process_material = ExtResource("2_h4ij2")
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="."]
+z_index = -100
+position = Vector2(560, 236)
+process_material = ExtResource("3_6oolf")
+
+[node name="GPUParticles2D3" type="GPUParticles2D" parent="."]
+z_index = -100
+position = Vector2(560, 236)
+process_material = ExtResource("4_mgggq")

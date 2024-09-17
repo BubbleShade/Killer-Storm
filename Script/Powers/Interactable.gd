@@ -7,8 +7,10 @@ var interactableType : String
 var velocity : Vector2 = Vector2(0,0)
 @onready var drag : Button = $Drag
 @export var rotatable = false
-func onDrag(): pass
-func onDragEnd(): pass
+func onDrag():
+	AudioHandler.play_audio(AudioHandler.Drag, 0, 1, true)
+func onDragEnd(): 
+	AudioHandler.play_audio(AudioHandler.Drag, 0, 0.75, true)
 
 func _input(event):
 	if not (rotatable && dragging): return
@@ -20,7 +22,9 @@ func _input(event):
 			if event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 				rotate(PI/20)
 func clear():
+	AudioHandler.play_audio(AudioHandler.Delete, 0, 1, true)
 	LevelInfo.power_removed_from_map.emit(interactableType)
+	LevelInfo.get_level_handler().hazards.erase(self)
 	queue_free()
 func on_start(): pass
 func on_stop(): pass
@@ -33,8 +37,9 @@ func on_button_press(event : InputEvent):
 			onDrag()
 			dragOffset = get_global_mouse_position() - global_position
 		else:
+			if(dragging): onDragEnd()
 			dragging = false
-			onDragEnd()
+
 	elif event.pressed && event.button_index == MOUSE_BUTTON_RIGHT:
 		clear()
 	
@@ -46,10 +51,11 @@ func _ready() -> void:
 	LevelInfo.on_stop.connect(on_stop)
 	pass
 func start():
-	drag.gui_input.connect(on_button_press)
 	#drag.button_down.connect(on_button_down)
 	#drag.button_up.connect(on_button_up)
 	LevelInfo.get_level_handler().hazards.append(self)
+	await get_tree().process_frame
+	drag.gui_input.connect(on_button_press)
 func preview():
 	modulate.a = 0.5
 

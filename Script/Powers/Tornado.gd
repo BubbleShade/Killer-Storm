@@ -6,8 +6,12 @@ class_name Tornado
 @export var RadiusY : float
 @onready var Zone : Sprite2D = $Zone
 
-func onDrag(): Zone.visible = true
-func onDragEnd(): Zone.visible = false
+func onDrag(): 
+	super.onDrag()
+	Zone.visible = true
+func onDragEnd():
+	super.onDragEnd()
+	Zone.visible = false
 func on_start(): 
 	$GPUParticles2D.emitting = true
 	var destroyArea : Area2D = $DestroyArea
@@ -18,7 +22,9 @@ func on_start():
 	destroyArea.monitoring = true
 func damage(body : Node2D):
 	if "buildingType" in body && "destroyed" in body && !body.destroyed:
+		LevelInfo.set_shake(0.6)
 		if "damage" in body: body.damage(1)
+		AudioHandler.play_audio(AudioHandler.Destroy, -5, 0.5)
 		if body.buildingType == "house":
 			var newDebris = $Debris.duplicate()
 			newDebris.visible = true
@@ -30,6 +36,7 @@ func damage(body : Node2D):
 			#newDebris.move()
 	if "person" in body:
 		if(body.can_destroy()):
+			LevelInfo.set_shake(0.3)
 			var newDebris = $Debris.duplicate()
 			newDebris.visible = true
 			newDebris.texture = load("res://Assets/Person.png")
@@ -62,6 +69,7 @@ func _ready() -> void:
 var timeSinceDamage = 0
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if(LevelInfo.started): LevelInfo.set_shake(0.1)
 	super._process(delta)
 	timeSinceDamage -= delta
 	if(timeSinceDamage <= 0):

@@ -1,0 +1,98 @@
+[gd_scene load_steps=7 format=3 uid="uid://bca3vwqbpbaxd"]
+
+[ext_resource type="Script" path="res://Scenes/Level/level_ui_final.gd" id="1_x4856"]
+[ext_resource type="Theme" uid="uid://cpm0uo3c8msol" path="res://OtherAssets/LevelUI.tres" id="2_13vwl"]
+[ext_resource type="Texture2D" uid="uid://bvdjgecwiwlg0" path="res://Assets/Powers/Meteor.png" id="3_xb3hr"]
+[ext_resource type="Script" path="res://Script/UI/ToggleButton.gd" id="4_8h5nj"]
+[ext_resource type="Script" path="res://Script/UI/buttons.gd" id="5_hfum4"]
+[ext_resource type="Theme" uid="uid://dkkg58pviiiq" path="res://OtherAssets/Menus.tres" id="11_kxhm6"]
+
+[node name="LevelUI" type="CanvasLayer"]
+script = ExtResource("1_x4856")
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = 2.0
+offset_top = 544.0
+offset_right = 1147.0
+offset_bottom = 647.0
+theme = ExtResource("2_13vwl")
+
+[node name="MenuBar" type="MenuBar" parent="Panel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
+layout_mode = 0
+offset_left = 4.0
+offset_right = 1073.0
+offset_bottom = 100.0
+
+[node name="Meteor" type="Button" parent="Panel/HBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+toggle_mode = true
+icon = ExtResource("3_xb3hr")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("4_8h5nj")
+
+[node name="Amount" type="RichTextLabel" parent="Panel/HBoxContainer/Meteor"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 75.0
+offset_right = 103.0
+offset_bottom = 101.0
+theme_override_font_sizes/mono_font_size = 20
+theme_override_font_sizes/normal_font_size = 20
+text = "1
+"
+scroll_active = false
+
+[node name="TemperCost" type="RichTextLabel" parent="Panel/HBoxContainer/Meteor"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = -2.0
+offset_right = 95.0
+offset_bottom = 24.0
+theme_override_colors/default_color = Color(1, 0.857648, 0.886801, 1)
+theme_override_font_sizes/mono_font_size = 20
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "[right]1000
+"
+scroll_active = false
+
+[node name="EndScreen" type="Panel" parent="."]
+process_mode = 3
+visible = false
+offset_left = 360.0
+offset_top = 33.0
+offset_right = 840.0
+offset_bottom = 474.0
+theme = ExtResource("2_13vwl")
+
+[node name="Temper" type="RichTextLabel" parent="EndScreen"]
+layout_mode = 0
+offset_top = 11.0
+offset_right = 481.0
+offset_bottom = 81.0
+theme = ExtResource("2_13vwl")
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "[center]Thank you for playing!"
+scroll_active = false
+
+[node name="Next" type="Button" parent="EndScreen"]
+layout_mode = 0
+offset_left = 139.0
+offset_top = 362.0
+offset_right = 321.0
+offset_bottom = 428.0
+theme = ExtResource("11_kxhm6")
+text = "Main Menu
+"
+script = ExtResource("5_hfum4")
+
+[connection signal="pressed" from="Panel/HBoxContainer/Meteor" to="." method="on_press"]
+[connection signal="pressed" from="EndScreen/Next" to="EndScreen/Next" method="_on_main_menu_pressed"]

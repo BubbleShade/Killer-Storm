@@ -2,7 +2,7 @@ extends Sprite2D
 class_name Building
 
 @export var hp = 1
-@export var inhabitable = 1
+@export var inhabitable : bool = true
 @export var people : int = 1
 var destroyed : bool = false
 @export var destructionValue : int = 1
@@ -19,7 +19,7 @@ func _ready() -> void:
 func destroy():
 	if(destroyed): return
 	if(destroySprite): texture = destroySprite
-	elif(spriteTable in str("Fire0")): texture = spriteTable["Fire0"]
+	elif(str("Fire0") in spriteTable): texture = spriteTable["Fire0"]
 	destroyed = true
 	levelHandler.destruction += destructionValue
 	$Area2D.monitoring = false

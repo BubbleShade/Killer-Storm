@@ -18,8 +18,10 @@ var temperCosts : Dictionary = {
 	"StormCloud": 10,
 	"Wind1": 2,
 	"Lightning": 2,
-	"Tornado": 30
+	"Tornado": 30,
+	"Tsunami": 50
 }
+
 func changeDestruction(percent):
 	Display.get_node("Destruction").text = "Destruction:\n{percent}%".format({"percent":percent} )  
 
@@ -52,7 +54,8 @@ func get_button(name) -> Button:
 	return button
 func on_start():
 	LevelInfo.change_power("none")
-	for i in visibleButtons:
+	for i : Button in visibleButtons:
+		i.disabled = true
 		i.visible = false
 	for i in LevelInfo.get_level_handler().hazards:
 		if "interactableType" in i && i.interactableType == "StormCloud":
@@ -65,14 +68,18 @@ func end_screen():
 		{"score":score, "destruction": levelHandler.destruction * 10, "temper":levelHandler.temper}
 	)
 	var emptyStar = load("res://Assets/StarEmpty.png")
+	var stars = 3
 	if(score < star3Threshold):
 		$EndScreen/Star3.texture = emptyStar
+		stars = 2
 		if(score < star2Threshold):
 			$EndScreen/Star2.texture = emptyStar
+			stars = 1
 			if(score < star1Threshold):
 				$EndScreen/Star1.texture = emptyStar
 				$EndScreen/Next.visible = false
-		
+				stars = 0
+	LevelInfo.levelStars[levelHandler.LevelNumber-1] = stars
 	endScreen.visible = true
 func on_stop():
 	$Panel.visible = false
@@ -102,9 +109,11 @@ func on_power_removed(power):
 func start_button_pressed():
 	LevelInfo.start()
 	startButton.visible = false
+	AudioHandler.play_audio(AudioHandler.Start, 0, 1, true)
 func stop_button_pressed():
 	LevelInfo.stop()
 	stopButton.visible = false
+	AudioHandler.play_audio(AudioHandler.Stop, 0, 1, true)
 	
 func set_power(button, power):
 	if(LevelInfo.selected_power == power): 

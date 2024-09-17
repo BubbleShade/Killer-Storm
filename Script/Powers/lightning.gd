@@ -23,6 +23,7 @@ func ready() -> void:
 	animation_finished.connect(on_animation_end)
 
 func on_animation_end():
+	LevelInfo.set_shake(0.5)
 	area.monitoring = true
 	get_tree().create_timer(0.1).timeout.connect(func(): area.monitoring = false)
 	fading = true

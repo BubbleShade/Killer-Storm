@@ -1,13 +1,15 @@
-[gd_scene load_steps=9 format=4 uid="uid://bafejntp6r63d"]
+[gd_scene load_steps=11 format=4 uid="uid://bafejntp6r63d"]
 
-[ext_resource type="TileSet" uid="uid://dmwk6gxyvmf06" path="res://Grass.tres" id="1_sdvns"]
-[ext_resource type="TileSet" uid="uid://c21osj73m31pp" path="res://Path.tres" id="2_0jy4y"]
+[ext_resource type="TileSet" uid="uid://dmwk6gxyvmf06" path="res://OtherAssets/Grass.tres" id="1_sdvns"]
+[ext_resource type="TileSet" uid="uid://c21osj73m31pp" path="res://OtherAssets/Path.tres" id="2_0jy4y"]
 [ext_resource type="PackedScene" uid="uid://bonvaan2ijcjd" path="res://Scenes/Buildings/MediumHouse.tscn" id="3_d7gxh"]
 [ext_resource type="PackedScene" uid="uid://djgpamym62unm" path="res://Scenes/Buildings/SmallHouse.tscn" id="4_62xii"]
 [ext_resource type="PackedScene" uid="uid://c6alqr12uqth3" path="res://Scenes/Buildings/SmallHouseFlipped.tscn" id="5_ntiif"]
 [ext_resource type="PackedScene" uid="uid://kuhkqdips6c3" path="res://Scenes/Level/LevelHandler.tscn" id="6_tkj5p"]
-[ext_resource type="Theme" uid="uid://dkkg58pviiiq" path="res://Menus.tres" id="7_xon54"]
+[ext_resource type="Theme" uid="uid://dkkg58pviiiq" path="res://OtherAssets/Menus.tres" id="7_xon54"]
 [ext_resource type="Script" path="res://Script/UI/Start.gd" id="8_s4pxc"]
+[ext_resource type="Script" path="res://Script/UI/buttons.gd" id="9_ih0uf"]
+[ext_resource type="Texture2D" uid="uid://cwukqq0cd5p3b" path="res://Assets/Title.png" id="10_j13dq"]
 
 [node name="MainMenu" type="Node2D"]
 
@@ -48,21 +50,42 @@ position = Vector2(114, 42)
 [node name="LevelHandler" parent="." instance=ExtResource("6_tkj5p")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
-offset_right = 1151.0
-offset_bottom = 68.0
-theme = ExtResource("7_xon54")
-bbcode_enabled = true
-text = "[center]Killer Storm"
+process_mode = 3
 
 [node name="Button" type="Button" parent="CanvasLayer"]
-offset_left = 481.0
+offset_left = 445.0
 offset_top = 142.0
-offset_right = 655.0
+offset_right = 705.0
 offset_bottom = 205.0
 theme = ExtResource("7_xon54")
 text = "Start"
 script = ExtResource("8_s4pxc")
 
+[node name="Button2" type="Button" parent="CanvasLayer"]
+offset_left = 445.0
+offset_top = 230.0
+offset_right = 705.0
+offset_bottom = 293.0
+theme = ExtResource("7_xon54")
+text = "Settings"
+script = ExtResource("9_ih0uf")
+
+[node name="Button3" type="Button" parent="CanvasLayer"]
+offset_left = 445.0
+offset_top = 318.0
+offset_right = 705.0
+offset_bottom = 381.0
+theme = ExtResource("7_xon54")
+text = "Level Select"
+script = ExtResource("9_ih0uf")
+
+[node name="Title" type="TextureRect" parent="CanvasLayer"]
+offset_left = 280.0
+offset_top = -39.0
+offset_right = 856.0
+offset_bottom = 153.0
+texture = ExtResource("10_j13dq")
+
 [connection signal="pressed" from="CanvasLayer/Button" to="CanvasLayer/Button" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/Button2" to="CanvasLayer/Button2" method="_open_menu" binds= ["Settings", "Settings"]]
+[connection signal="pressed" from="CanvasLayer/Button3" to="CanvasLayer/Button3" method="_open_menu" binds= ["LevelSelect", "LevelSelect"]]

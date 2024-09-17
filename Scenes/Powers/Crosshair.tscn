@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://b3ibj81eu8vyj"]
+
+[ext_resource type="Texture2D" uid="uid://chdx2hi77i3bt" path="res://Assets/Powers/Crosshair.png" id="1_fe702"]
+[ext_resource type="Script" path="res://Scenes/Powers/crosshair.gd" id="2_lesl0"]
+
+[node name="Crosshair" type="Sprite2D"]
+texture = ExtResource("1_fe702")
+offset = Vector2(-0.5, -0.5)
+script = ExtResource("2_lesl0")
